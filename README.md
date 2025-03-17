@@ -7,9 +7,8 @@ This repository hosts releases of the Drata Agent for macOS.
 To install the Drata Agent, you can use our installation script:
 
 ```bash
-curl -o install_drata_agent.sh https://raw.githubusercontent.com/hassantayyab/drata-agent-releases/main/install_drata_agent.sh
 chmod +x install_drata_agent.sh
-sudo ./install_drata_agent.sh YOUR_EMAIL YOUR_KEY
+sudo ./install_drata_agent.sh YOUR_EMAIL YOUR_KEY https://github.com/hassantayyab/drata-agent-releases/releases/latest/download/Drata-Agent-mac.pkg
 ```
 
 ### Kill existing instances
