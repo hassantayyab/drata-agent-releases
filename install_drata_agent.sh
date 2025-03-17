@@ -9,21 +9,28 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 # Variables
-if [ "$#" -ne 2 ]; then
-  echo "Usage: $0 EMAIL REGISTRATION_KEY"
-  echo "Example: $0 user@company.com YOUR_REGISTRATION_KEY"
+if [ "$#" -ne 3 ]; then
+  echo "Usage: $0 EMAIL REGISTRATION_KEY DOWNLOAD_URL"
+  echo "Example: $0 user@company.com YOUR_REGISTRATION_KEY https://example.com/path/to/Drata-Agent-mac.pkg"
   exit 1
 fi
 
 EMAIL="$1"
 KEY="$2"
-DOWNLOAD_URL="https://github.com/hassantayyab/drata-agent-releases/releases/latest/download/Drata-Agent-mac.pkg"
+DOWNLOAD_URL="$3"
 
 echo "Using email: $EMAIL"
+echo "Download URL: $DOWNLOAD_URL"
 
 # Validate email format
 if [[ ! "$EMAIL" =~ ^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$ ]]; then
   echo "Invalid email format"
+  exit 1
+fi
+
+# Validate URL format
+if [[ ! "$DOWNLOAD_URL" =~ ^https?:// ]]; then
+  echo "Invalid download URL format. Must start with http:// or https://"
   exit 1
 fi
 
@@ -51,7 +58,7 @@ mkdir -p "$TEMP_DIR"
 cd "$TEMP_DIR"
 
 # Download the package
-echo "Downloading Drata Agent package..."
+echo "Downloading Drata Agent package from: $DOWNLOAD_URL"
 curl --fail -L -o "DrataAgent.pkg" "$DOWNLOAD_URL"
 
 if [ ! -f "DrataAgent.pkg" ]; then
@@ -199,4 +206,4 @@ echo "- Auto-start: $LAUNCH_AGENT_FILE"
 echo "- Launch Status: Started"
 echo
 
-echo "✅ Installation completed successfully"
+echo "✅ Installation completed successfully" 
