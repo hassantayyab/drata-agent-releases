@@ -11,7 +11,7 @@ fi
 # Variables
 if [ "$#" -ne 3 ]; then
   echo "Usage: $0 EMAIL REGISTRATION_KEY DOWNLOAD_URL"
-  echo "Example: $0 user@company.com YOUR_REGISTRATION_KEY https://example.com/path/to/Drata-Agent-mac.pkg"
+  echo "Example: $0 user@company.com YOUR_REGISTRATION_KEY https://github.com/hassantayyab/drata-agent-releases/releases/latest/download/Drata-Agent-mac.pkg"
   exit 1
 fi
 
